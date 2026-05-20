@@ -3,6 +3,27 @@ import Row from 'react-bootstrap/Row';
 import CandidatoItem from './CandidatoItem';
 import { useState } from 'react';
 
+const candidatos = [
+    {
+        ID: 1,
+        nombre: "Sofía",
+        imagen: "https://randomuser.me/api/portraits/women/90.jpg",
+        votos: 5
+    },
+    {
+        ID: 2,
+        nombre:"Pablo",
+        imagen: "https://randomuser.me/api/portraits/men/49.jpg",
+        votos: 3   
+    },
+    {
+        ID: 3,
+        nombre: "Valeria",
+        imagen: "https://randomuser.me/api/portraits/women/61.jpg",
+        votos: 2
+    }
+];
+
 //Compomente padre.
 export default function CandidatosLista(){
 
@@ -20,27 +41,19 @@ export default function CandidatosLista(){
             <p> Cantidad de votos: {cantidad_votos} </p>
 
             <Row xs={1} md={3} className="g-4">
-                <Col>
-                    <CandidatoItem 
-                        nombre="Sofía"
-                        imagen="https://randomuser.me/api/portraits/women/90.jpg"
-                        onChangeVotos={handleCantidadVotos}
-                    />
-                </Col>
-                <Col>
-                    <CandidatoItem 
-                        nombre="Pablo"
-                        imagen="https://randomuser.me/api/portraits/men/49.jpg" 
-                        onChangeVotos={handleCantidadVotos}
-                    />
-                </Col>
-                <Col>
-                    <CandidatoItem 
-                        nombre="Valeria"
-                        imagen="https://randomuser.me/api/portraits/women/61.jpg" 
-                        onChangeVotos={handleCantidadVotos}
-                    />
-                </Col>
+
+                {
+                    candidatos.map( c => (
+                        <Col key={c.ID}>
+                            <CandidatoItem 
+                                nombre={c.nombre}
+                                imagen={c.imagen}
+                                onChangeVotos={handleCantidadVotos}
+                            />
+                        </Col>
+                    ))
+                }
+                             
             </Row>
 
         </>
