@@ -9,24 +9,37 @@ import Container from 'react-bootstrap/Container';
 //Menú
 import Menu from './components/Menu';
 
+//Contextos
+import AuthProvider from './contexts/AuthContext';
+
 //Páginas
-import CandidatosLista from './components/CandidatosLista';
-import Pokemons from './components/Pokemons';
+import CandidatosLista from './pages/CandidatosLista';
+import Pokemons from './pages/Pokemons';
+import Pokemon from './pages/Pokemon';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 export default function App(){
 
   return (
-    <BrowserRouter>
-      <Menu />
-      <Container>
-        <Routes>
-          <Route path='/' element={<h1> Bienvenida/o a mi sitio </h1>} />
-          <Route path='/candidatos' element={<CandidatosLista />} />
-          <Route path='/pokemones' element={<Pokemons />} />
-          <Route path='*' element={<h1> Error 404 </h1>} />
-        </Routes>
-      </Container>
-    </BrowserRouter>
+
+    <AuthProvider>
+      <BrowserRouter>
+        <Menu />
+        <Container>
+          <Routes>
+            <Route path='/' element={<h1> Bienvenida/o a mi sitio </h1>} />
+            <Route path='/candidatos' element={<CandidatosLista />} />
+            <Route path='/pokemones' element={<Pokemons />} />
+            <Route path='/pokemon/:nombre' element={<Pokemon />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='*' element={<h1> Error 404 </h1>} />
+          </Routes>
+        </Container>
+      </BrowserRouter>
+    </AuthProvider>
+
   )
 
 }
